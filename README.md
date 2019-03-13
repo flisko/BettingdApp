@@ -18,7 +18,7 @@ Next, install MetaMask(see link above).
 
 "npm -v"
 
-# Next install git. After installation re-open command prompt with elevated privleges
+# Next install git. After installation RE-OPEN command prompt with elevated privleges!!!
 https://git-scm.com/downloads
 
 # After that change directory to a working folder and clone the git in command prompt with 
