@@ -31,3 +31,5 @@ then "cd BettingdApp" and "cd betting-dapp"
 After that we will install web3 and font awesome using "npm i web3@^0.20.0 vuex font-awesome -s"
 
 To start the project use "npm start".
+
+This installs the default project. See Readme inside betting-dapp folder for more specific information regarding the actual smart contarct code and the dApp itself.
