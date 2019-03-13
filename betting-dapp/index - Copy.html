@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>betting-dapp</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script>
+  var abi=web3.eth.contract([
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_urlID",
+				"type": "string"
+			}
+		],
+		"name": "nastaviURLID",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "scoreA",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "myid",
+				"type": "bytes32"
+			},
+			{
+				"name": "result",
+				"type": "string"
+			}
+		],
+		"name": "__callback",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "PosliPoizvedbo",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "myid",
+				"type": "bytes32"
+			},
+			{
+				"name": "result",
+				"type": "string"
+			},
+			{
+				"name": "proof",
+				"type": "bytes"
+			}
+		],
+		"name": "__callback",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "startIndex",
+				"type": "uint256"
+			},
+			{
+				"name": "endIndex",
+				"type": "uint256"
+			}
+		],
+		"name": "splitscora",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "testurl",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "urlID",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "DieDieDie",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "ekipa1",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "SplitajScore",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "scoreB",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "ekipa2",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "imeEkipe",
+				"type": "string"
+			}
+		],
+		"name": "deposit",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "betValue",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "preveriZmagovalca",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "Winner",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "zmagovalnaEkipa",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_ekipa1",
+				"type": "string"
+			},
+			{
+				"name": "_ekipa2",
+				"type": "string"
+			}
+		],
+		"name": "nastaviImeEkip",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "naslovBetterja",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "vrednostStave",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "PosljiQuery",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "posljiEtherZmagovalcu",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "izbranaEkipa",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "s11",
+				"type": "string"
+			},
+			{
+				"name": "s22",
+				"type": "string"
+			}
+		],
+		"name": "PrimerjajStringe",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "pure",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "score",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "depositETH",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "constructor"
+	},
+	{
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "fallback"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "text",
+				"type": "string"
+			}
+		],
+		"name": "Log",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "text",
+				"type": "string"
+			}
+		],
+		"name": "PoslanQuery",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "text",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "a",
+				"type": "string"
+			}
+		],
+		"name": "Vrednosta",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "text",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "b",
+				"type": "string"
+			}
+		],
+		"name": "Vrednostb",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "text",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "c",
+				"type": "string"
+			}
+		],
+		"name": "Zmagalje",
+		"type": "event"
+	}
+]
+)
+  var contractAddress = "0x15cbd0a5149814fd9c41a27ab0f02fd3e9764da9";
+  var FootballBetting = abi.at(contractAddress);
+			
+
+	var zmagovalnaekipa;
+	var izbranaEkipa;
+	var flag=true;
+	function Sporocilo()
+	{
+		if(flag)
+		{
+			if(izbranaEkipa==zmagovalnaekipa)
+			{
+				alert("Zmagali ste!");
+				flag=false;
+			}
+			else
+			{
+				alert("Niste zmagali!");
+				flag=false;
+			}
+		}
+	}
+	
+	function refreshImena()//posodobi imena ekip
+	{
+			
+			FootballBetting.ekipa1(function(error, result){
+	if(!error)
+       document.getElementById("ekipa1").innerHTML=JSON.stringify(result).slice(1,-1);
+   else
+       console.log(error);
+	});
+	
+	FootballBetting.ekipa2(function(error, result){//nastavi imena gumbov
+	if(!error)
+       document.getElementById("ekipa2").innerHTML=JSON.stringify(result).slice(1,-1);
+   else
+       console.log(error);
+	});
+	}
+	
+	function refreshRezultat()
+	{
+		FootballBetting.scoreA(function(error, result){
+			if(!error)
+				document.getElementById("rez1").innerHTML=JSON.stringify(result).slice(1,-1);
+			else
+				console.log(error);
+			
+		})
+		FootballBetting.scoreB(function(error, result){
+			if(!error)
+				document.getElementById("rez2").innerHTML=JSON.stringify(result).slice(1,-1);
+			else
+				console.log(error);
+			
+		})
+	}
+	
+		function refreshWinnerTeam()
+	{
+		FootballBetting.zmagovalnaEkipa(function(error, result){
+			if(!error){
+				document.getElementById("zmagovalec").value=JSON.stringify(result).slice(1,-1);
+				zmagovalnaekipa=JSON.stringify(result).slice(1,-1);
+				Sporocilo();
+				}
+			else
+				console.log(error);
+			
+		})
+		
+	}
+	
+	$(document).ready(function () {//nastavi imena 
+	
+	FootballBetting.ekipa1(function(error, result){
+	if(!error)
+       document.getElementById("ekipa1").innerHTML=JSON.stringify(result).slice(1,-1);
+	   
+   else
+       console.error(error);
+	});
+	
+	FootballBetting.ekipa2(function(error, result){//nastavi imena gumbov
+	if(!error)
+       document.getElementById("ekipa2").innerHTML=JSON.stringify(result).slice(1,-1);
+   else
+       console.error(error);
+	});
+	
+	$("#nastaviEkipe").click(function(){//nastavi imena ekip
+		if($("#imeEkipe1").val()=="" || $("#imeEkipe2").val()=="") alert("Ni vpisane ekipe!");
+		else
+		{
+			FootballBetting.nastaviImeEkip($("#imeEkipe1").val(),$("#imeEkipe2").val(),function(error, result){
+				if(!error)
+				{
+					console.log(JSON.stringify(result));
+					setInterval(refreshImena,5000); //delay da se posodobijo imena
+				}
+				else
+				{
+					console.log(error);
+				}
+			
+			})
+		}
+	
+	})
+	
+		$("#btnUrl").click(function(){//nastavi URL ID
+		if($("#urlID").val()=="") alert("Ni vpisane ekipe!");
+		else
+		{
+			FootballBetting.nastaviURLID($("#urlID").val(),function(error, result){
+				if(!error)
+				{
+					console.log(JSON.stringify(result));
+					
+				}
+				else
+				{
+					console.log(error);
+				}
+			
+			})
+		}
+	
+	})
+	
+	$("#ekipa1").click(function(){
+		if($("#betValue").val()=="") alert("Ni vpisane vrednosti stave!"); else
+				FootballBetting.deposit.sendTransaction(document.getElementById('ekipa1').innerHTML,{from: web3.eth.coinbase, value:web3.toWei($("#betValue").val(),'wei'), to: contractAddress},function(error, result){
+				if(!error)
+				{
+				izbranaEkipa=document.getElementById('ekipa1').innerHTML;
+				flag=true;
+					console.log("Tx hash:"+result);
+				}
+				else
+				{
+					console.log(error);
+				}
+				      
+				})})
+	$("#ekipa2").click(function(){
+		if($("#betValue").val()=="") alert("Ni vpisane vrednosti stave!"); else
+				FootballBetting.deposit.sendTransaction(document.getElementById('ekipa2').innerHTML,{from: web3.eth.coinbase, value:web3.toWei($("#betValue").val(),'wei'), to: contractAddress},function(error, result){
+				if(!error)
+				{
+				izbranaEkipa=document.getElementById('ekipa2').innerHTML;
+				flag=true;
+					console.log("Tx hash:"+result);
+				}
+				else
+				{
+					console.log(error);
+				}
+				      
+				})})
+				
+					//preveri zmagovalca
+	$("#btnPreveriZmagovalca").click(function(){
+		FootballBetting.preveriZmagovalca(function(error, result){
+			if(!error)
+			{
+				console.log(result);
+				setInterval(refreshWinnerTeam,7000);
+			}
+			else
+			{
+				console.log(error);
+			}
+		})})
+		
+		
+	$("#btnPreveriRezultat").click(function(){//preveri rezultat
+		FootballBetting.PosliPoizvedbo(function(error, result){
+			if(!error)
+			{
+				console.log(result);
+				setInterval(refreshRezultat,6000);
+			}
+			else
+			{
+				console.log(error);
+			}
+		})})
+		
+		
+	
+	
+})
+</script>
+  </body>
+</html>
