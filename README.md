@@ -10,26 +10,24 @@ The first thing we’ll need is nodeJS and NPM, get them here and follow the ins
 
 Next, install MetaMask(see link above).
 
-Our last prerequisite is vue-cli, this will help us easily set up a VueJS project
+## Build Setup
 
-Open Command prompt with elevated privleges. Run 
-
+``` bash
+# Open Command prompt with elevated privleges. Run commands bellow to check if NodeJS and NPM are installed correctly.
 "node -v"
 
 "npm -v"
 
-to check if NodeJS and NPM are installed correctly.
+# Next install git. After installation re-open command prompt with elevated privleges
+https://git-scm.com/downloads
 
-Next install https://git-scm.com/downloads
-
-After that, clone the git with 
-
+# After that change directory to a working folder and clone the git in command prompt with 
 git clone https://github.com/flisko/BettingdApp
 
-then "cd BettingdApp" and "cd betting-dapp"
+# then "cd BettingdApp" and "cd betting-dapp" when inside we will install web3 and vuex font awesome 
+npm i web3@^0.20.0 vuex font-awesome -s
 
-After that we will install web3 and font awesome using "npm i web3@^0.20.0 vuex font-awesome -s"
-
-To start the project use "npm start".
-
+# to test if it works run
+npm start
+```
 This installs the default project. See Readme inside betting-dapp folder for more specific information regarding the actual smart contarct code and the dApp itself.
