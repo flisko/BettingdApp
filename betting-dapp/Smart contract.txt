@@ -1,0 +1,134 @@
+﻿pragma solidity ^ 0.4 .23;
+
+
+import "github.com/oraclize/ethereum-api/oraclizeAPI.sol";
+import "github.com/willitscale/solidity-util/lib/Strings.sol";
+import "github.com/willitscale/solidity-util/lib/Integers.sol";
+import "github.com/Arachnid/solidity-stringutils/strings.sol";
+
+contract FootballBettingDapp is usingOraclize {
+
+//declares variables
+
+    using Strings for string;
+    using strings for * ;
+    using Integers for uint;
+    address public owner;
+    string public ekipa1;
+    string public ekipa2;
+    string public izbranaEkipa;
+    string public zmagovalnaEkipa;
+    uint public betValue;
+    string public urlID = "MoFfHUpM";
+    address public naslovBetterja;
+    string public testurl;
+    string public score;
+    string public scoreA;
+    string public scoreB;
+
+    // mapping (address => uint) public better;
+    event Log(string text);
+    event PoslanQuery(string text);
+    event Vrednosta(string text, string a);
+    event Vrednostb(string text, string b);
+    event Zmagalje(string text, string c);
+
+    function FootballBettingDapp() public payable { 
+        ekipa1 = "Testna ekipa 1";
+        ekipa2 = "Testna ekipa 2";
+        betValue = 0;
+        owner = msg.sender;
+    }
+
+    function depositETH() public payable {
+        require(msg.value > 0);
+    }
+
+    function() public payable {
+        depositETH();
+    }
+
+    function DieDieDie() public { //Self destruct
+        selfdestruct(owner);
+    }
+
+    function nastaviImeEkip(string _ekipa1, string _ekipa2) public { //Sets the name of the teams (only contract owner can set)
+        if ((msg.sender != owner) || (bytes(_ekipa1).length == 0) || (bytes(_ekipa2).length == 0)) revert();
+        ekipa1 = _ekipa1;
+        ekipa2 = _ekipa2;
+        vrednostStave();
+    }
+
+    function nastaviURLID(string _urlID) public { //sets URL to get the score
+        if (msg.sender != owner) revert();
+        urlID = _urlID;
+    }
+
+    function vrednostStave() public constant returns(uint) { //returns bet value
+        uint val = betValue;
+        return val;
+    }
+
+    function Winner() public { //Saves the score then checks the winner
+        uint rezA = parseInt(scoreA);
+        uint rezB = parseInt(scoreB);
+        if (rezA > rezB) {
+            zmagovalnaEkipa = ekipa1;
+        } else zmagovalnaEkipa = ekipa2;
+        posljiEtherZmagovalcu();
+        Zmagalje("zmagala je ekipa:", zmagovalnaEkipa);
+    }
+
+    function __callback(bytes32 myid, string result) { //callback function for the oracle
+        if (msg.sender != oraclize_cbAddress()) revert();
+        score = result;
+        SplitajScore();
+    }
+    
+    function PosljiQuery() payable public //send the query to oracle to get the score  CHANGE THIS
+    {
+        string memory videoURL = "http://cb01107a.ngrok.io/api/rezultati";
+        PoslanQuery("Query je bil poslan");
+        oraclize_query("URL", videoURL);
+    }
+
+    function SplitajScore() public { //refactors the score string
+        scoreA = splitscora(0, 1);
+        scoreB = splitscora(2, 3);
+    }
+
+    function splitscora(uint startIndex, uint endIndex) constant returns(string) { //returns only the score from the result string
+        bytes memory strBytes = bytes(score);
+        bytes memory result = new bytes(endIndex - startIndex);
+        for (uint i = startIndex; i < endIndex; i++) {
+            result[i - startIndex] = strBytes[i];
+        }
+        return string(result);
+    }
+
+    function PrimerjajStringe(string s11, string s22) public pure returns(bool) {
+        if (uint(keccak256(abi.encodePacked(s11))) == uint(keccak256(abi.encodePacked(s22))))
+            return true;
+    }
+
+    function deposit(string imeEkipe) public payable {
+        naslovBetterja = msg.sender;
+        izbranaEkipa = imeEkipe;
+        betValue = msg.value;
+    }
+
+
+    function preveriZmagovalca() public { //checks for the winner
+        Winner();
+    }
+
+    function PosliPoizvedbo() public { //send the query to oracle
+        PosljiQuery();
+    }
+
+    function posljiEtherZmagovalcu() public { //send all betted Ether to the winner
+        if (PrimerjajStringe(izbranaEkipa, zmagovalnaEkipa)) {
+            naslovBetterja.transfer(this.balance);
+        }
+    }
+}
